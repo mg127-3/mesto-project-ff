@@ -15,23 +15,24 @@ function createCard(item, deleteCard) {
     cardImage.src = item.link;
     cardImage.alt = item.name;
     cardTitle.textContent = item.name;
-  
-    cardList.append(cardElement);
 
     deleteButton.addEventListener('click', () => {
         deleteCard(cardElement);
       });
-  }
-// @todo: Функция удаления карточки
 
+    return cardElement;
+  }
+
+// @todo: Функция удаления карточки
 function deleteCard(cardElement) {
     cardElement.remove();
   }
 
-// @todo: Вывести карточки на страницу
 
+// @todo: Вывести карточки на страницу
 initialCards.forEach((item) => {
-    createCard(item, deleteCard);
+    const displayCard = createCard(item, deleteCard);
+    cardList.append(displayCard);
   });
 
 
