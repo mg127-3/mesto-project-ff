@@ -50,12 +50,7 @@ function apiUpdateUserImage(avatarUrl) {
       avatar: avatarUrl,
     }),
   })
-  .then((res) => {
-    if (!res.ok) {
-      return Promise.reject(`Ошибка: ${res.status}`);
-    }
-    return apiGetResponseData(res)
-  });
+  .then(apiGetResponseData);
 }
 
 // Обновление профильной информации юзера

@@ -19,9 +19,7 @@ function hideInputError(formElement, inputElement, config) {
 // Добавление кастомной валидации
 
 function setCustomValidity(inputElement) {
-  if (inputElement.validity.valueMissing) {
-    inputElement.setCustomValidity("Вы пропустили это поле");
-  } else if (inputElement.validity.patternMismatch) {
+  if (inputElement.validity.patternMismatch) {
     const customMessage = inputElement.dataset.errorMessage;
     inputElement.setCustomValidity(customMessage);
   } else {
@@ -58,10 +56,8 @@ function clearValidation(formElement, config) {
   const buttonElement = formElement.querySelector(config.submitButtonSelector);
 
   inputList.forEach((inputElement) => {
-    const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-    inputElement.classList.remove(config.inputErrorClass);
-    errorElement.classList.remove(config.errorClass);
-    errorElement.textContent = "";
+    hideInputError(formElement, inputElement, config);
+    inputElement.setCustomValidity("");
   });
 
   toggleButtonState(inputList, buttonElement, config);
@@ -80,8 +76,10 @@ const hasInvalidInput = (inputList) => {
 const toggleButtonState = (inputList, buttonElement, config) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(config.inactiveButtonClass);
+    buttonElement.disabled = true;
   } else {
     buttonElement.classList.remove(config.inactiveButtonClass);
+    buttonElement.disabled = false;
   }
 };
 
